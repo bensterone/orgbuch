@@ -267,6 +267,28 @@ class TreeRenderer {
   _clearSelection() { this.container.querySelectorAll('[aria-selected="true"]').forEach(n => n.removeAttribute('aria-selected')); }
 }
 
+async function enterEdit(node) {
+  try {
+    const { EditorJS, tools } = await ensureEditor();
+    const editor = new EditorJS({
+      holder: 'editorjs',
+      data: node.editorData || { blocks: [] },
+      tools: {
+        header: { class: tools.header },
+        list: { class: tools.list },
+        quote: { class: tools.quote },
+        code: { class: tools.code },
+        delimiter: tools.delimiter ? { class: tools.delimiter } : undefined,
+        marker: tools.marker ? { class: tools.marker } : undefined,
+        checklist: tools.checklist ? { class: tools.checklist } : undefined
+      }
+    });
+    // speichern, zerstören etc.
+  } catch (err) {
+    console.error('Editor loading error:', err);
+  }
+}
+
 /* UIManager (enhanced: Editor + BPMN wiring) */
 class UIManager {
   constructor() {
@@ -654,6 +676,17 @@ class UIManager {
   _deleteItem(path) {
     const parts = path.split('/'); const name = parts.pop(); if (!confirm(`Möchten Sie "${name}" wirklich löschen?`)) return; const ok = this.store.removeItem(path);
     if (ok) { this.renderer.render(); this.store.buildIndex(); this._showWelcome(); alert('Gelöscht.'); } else { alert('Fehler beim Löschen.'); }
+  }
+}
+async function showProcess(node) {
+  try {
+    const BpmnModeler = await ensureBpmn();
+    const modeler = new BpmnModeler({ container: '#bpmn-canvas' });
+    const xml = node.content?.bpmnXml || defaultBpmnXml();
+    await modeler.importXML(xml);
+    // speichern etc.
+  } catch (err) {
+    console.error('BPMN error:', err);
   }
 }
 
