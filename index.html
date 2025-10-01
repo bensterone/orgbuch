@@ -2,13 +2,12 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WBG Zentrum — Organisationshandbuch (Editor.js + BPMN)</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- app.js als ES Module (enthält lazy-loader für Editor.js & bpmn-js) -->
   <script type="module" defer src="app.js"></script>
 </head>
-<body data-color-scheme="light">
+<body>
   <div class="app-container">
     <header class="app-header">
       <div class="header-left">
@@ -17,8 +16,8 @@
       </div>
       <div class="header-right">
         <input id="search-input" aria-label="Suchen" class="search-input" placeholder="Suchen..." />
-        <button id="btn-export" class="btn" title="Exportieren">Export</button>
-        <button id="btn-import" class="btn" title="Importieren">Import</button>
+        <button id="btn-export" class="btn">Export</button>
+        <button id="btn-import" class="btn">Import</button>
       </div>
     </header>
 
@@ -31,15 +30,13 @@
         <nav aria-label="Breadcrumb" id="breadcrumb" class="breadcrumb"></nav>
 
         <section id="view-area" class="view-area">
-          <!-- Welcome -->
           <section id="welcome" class="view active">
             <h2>Willkommen</h2>
-            <p>Wählen Sie einen Eintrag links, um Inhalte anzuzeigen oder zu bearbeiten.</p>
-            <div class="quick-access" id="quick-access"></div>
+            <p>Wählen Sie einen Eintrag links.</p>
+            <div id="quick-access" class="quick-access"></div>
           </section>
 
-          <!-- Document View -->
-          <section id="doc-view" class="view hidden" aria-live="polite">
+          <section id="doc-view" class="view hidden">
             <header class="view-header">
               <h2 id="doc-title">Dokument</h2>
               <div class="controls">
@@ -48,25 +45,22 @@
                 <button id="cancel-btn" class="btn hidden">Abbrechen</button>
               </div>
             </header>
-
-            <article id="doc-content" class="doc-content" tabindex="0"></article>
-            <div id="editor-root" class="editor-root hidden" aria-hidden="true"></div>
+            <article id="doc-content" class="doc-content"></article>
+            <div id="editor-root" class="editor-root hidden"></div>
           </section>
 
-          <!-- Process / BPMN View -->
           <section id="process-view" class="view hidden">
             <header class="view-header">
-              <h2 id="process-title">BPMN Prozess</h2>
+              <h2 id="process-title">Prozess</h2>
               <div class="controls">
-                <button id="import-bpmn" class="btn">XML importieren</button>
-                <button id="export-bpmn" class="btn">XML exportieren</button>
+                <button id="import-bpmn" class="btn">Importieren</button>
+                <button id="export-bpmn" class="btn">Exportieren</button>
                 <button id="new-bpmn" class="btn">Neu</button>
               </div>
             </header>
-            <div id="bpmn-canvas" class="bpmn-canvas" style="height:520px;background:#fff;border:1px solid rgba(0,0,0,0.06);"></div>
+            <div id="bpmn-canvas" class="bpmn-canvas"></div>
           </section>
 
-          <!-- Organigramm -->
           <section id="org-view" class="view hidden">
             <h2>Organigramm</h2>
             <div id="org-canvas" class="org-canvas">Organigramm (statisch)</div>
@@ -80,13 +74,9 @@
       </aside>
     </div>
 
-    <!-- Context menu -->
     <div id="context-menu" class="context-menu hidden" role="menu"></div>
-
-    <!-- File inputs (hidden) -->
     <input id="import-file" type="file" accept="application/json" class="hidden" />
-    <input id="import-bpmn-file" type="file" accept=".bpmn,.xml,text/xml,application/xml" class="hidden" />
-
+    <input id="import-bpmn-file" type="file" accept=".bpmn,.xml,application/xml,text/xml" class="hidden" />
   </div>
 </body>
 </html>
