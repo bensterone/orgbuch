@@ -1,0 +1,59 @@
+:root{
+  --bg:#fbfaf8;
+  --surface:#ffffff;
+  --text:#12343b;
+  --muted:#66797b;
+  --primary:#21808d;
+  --border:rgba(0,0,0,0.06);
+  --radius:10px;
+  --gap:12px;
+  --shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.app-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.header-left h1{margin:0;font-size:18px}
+.subtitle{margin:2px 0 0 0;color:var(--muted);font-size:13px}
+.header-right{display:flex;gap:8px;align-items:center}
+.search-input{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:transparent}
+.btn{background:transparent;border:1px solid var(--border);padding:8px 10px;border-radius:8px;cursor:pointer}
+.btn:focus{outline:2px solid rgba(33,128,141,0.12)}
+.layout{display:grid;grid-template-columns:280px 1fr 320px;gap:16px;padding:16px}
+.sidebar{padding:12px}
+.tree{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;min-height:320px;max-height:80vh;overflow:auto}
+.tree-node{padding:6px 8px;border-radius:6px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.tree-node:hover{background:rgba(0,0,0,0.02)}
+.tree-node[aria-selected="true"]{background:linear-gradient(90deg,rgba(33,128,141,0.08),transparent);outline:2px solid rgba(33,128,141,0.12)}
+.tree-children{margin-left:16px;margin-top:6px}
+.icon{width:22px;text-align:center}
+.label{flex:1}
+.main{padding:12px}
+.view{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;min-height:320px;box-shadow:0 2px 6px rgba(0,0,0,0.02)}
+.hidden{display:none}
+.view-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.doc-content{white-space:pre-wrap;color:var(--text)}
+.editor-root{min-height:200px}
+.outline{padding:12px}
+.context-menu{position:fixed;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);padding:6px;border-radius:8px;z-index:50}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);z-index:100}
+.modal-card{background:var(--surface);padding:16px;border-radius:12px;min-width:320px;box-shadow:var(--shadow)}
+.form{padding:8px;border:1px solid var(--border);border-radius:8px}
+
+.quick-access{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.quick-access .btn{padding:6px 8px;font-size:13px}
+
+/* BPMN / Editor containers */
+.bpmn-canvas{width:100%;height:520px;border-radius:6px;overflow:hidden}
+.editor-root textarea{font-family:monospace;width:100%;min-height:220px;padding:10px;border-radius:6px;border:1px solid var(--border)}
+#editorjs { min-height: 220px; }
+
+@media (max-width:1000px){
+  .layout{grid-template-columns:1fr}
+  .outline{display:none}
+  .sidebar{order:2}
+  .main{order:1}
+}
+
+/* Small utilities */
+.hidden-visually{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
